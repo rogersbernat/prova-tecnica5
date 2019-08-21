@@ -1,0 +1,22 @@
+PS C:\git\prova-tecnica5\kubernetes> ls
+
+
+    Directory: C:\git\prova-tecnica5\kubernetes
+
+I0821 17:02:15.604406   14784 round_trippers.go:416] GET https://kubernetes.docker.internal:6443/openapi/v2?timeout=32s
+I0821 17:02:15.604406   14784 round_trippers.go:423] Request Headers:
+I0821 17:02:15.610403   14784 round_trippers.go:426]     User-Agent: kubectl.exe/v1.14.3 (windows/amd64) kubernetes/5e53fd6
+I0821 17:02:15.610403   14784 round_trippers.go:426]     Accept: application/com.github.proto-openapi.spec.v2@v1.0+protobuf
+I0821 17:02:15.628404   14784 round_trippers.go:441] Response Status: 200 OK in 18 milliseconds
+I0821 17:02:15.705405   14784 round_trippers.go:416] GET https://kubernetes.docker.internal:6443/apis/apps/v1/namespaces/default/deployments/nginx0-deployment
+I0821 17:02:15.705405   14784 round_trippers.go:423] Request Headers:
+I0821 17:02:15.706409   14784 round_trippers.go:426]     Accept: application/json
+I0821 17:02:15.706409   14784 round_trippers.go:426]     User-Agent: kubectl.exe/v1.14.3 (windows/amd64) kubernetes/5e53fd6
+I0821 17:02:15.709403   14784 round_trippers.go:441] Response Status: 404 Not Found in 1 milliseconds
+I0821 17:02:15.715406   14784 round_trippers.go:416] POST https://kubernetes.docker.internal:6443/apis/apps/v1/namespaces/default/deployments
+I0821 17:02:15.715406   14784 round_trippers.go:423] Request Headers:
+I0821 17:02:15.715406   14784 round_trippers.go:426]     Accept: application/json
+I0821 17:02:15.715406   14784 round_trippers.go:426]     Content-Type: application/json
+I0821 17:02:15.716404   14784 round_trippers.go:426]     User-Agent: kubectl.exe/v1.14.3 (windows/amd64) kubernetes/5e53fd6
+I0821 17:02:15.720407   14784 round_trippers.go:441] Response Status: 201 Created in 4 milliseconds
+deployment.apps/nginx0-deployment created
