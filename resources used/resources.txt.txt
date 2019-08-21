@@ -1,1 +1,13 @@
-https://aws.amazon.com/premiumsupport/knowledge-center/route-53-reverse-dns/
+Day 1:
+
+Defining folder structure, test terraform init with AWS and document what is DNS resolver:
+
+--- Documentation:
+
+    easy guide from AWS docs:
+            https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/resolver-getting-started.html
+
+    tech talk description for dns resolver:
+  
+            https://www.youtube.com/watch?v=Rka2rs0J9BI
+    
