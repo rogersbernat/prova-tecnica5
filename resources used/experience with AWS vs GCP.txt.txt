@@ -1,0 +1,7 @@
+AWS does not have a ssh service like the GCP Metadata Service: https://cloud.google.com/compute/docs/storing-retrieving-metadata
+GCP has two tier levels for network, not AWS: tier standard routing departs from where the datacenter is and premium from the closest gcp point to the customer https://cloud.google.com/network-tiers/docs/using-network-service-tiers
+AWS ec2 instances were based in XEN server and in GCP they are based in KVM: https://kinsta.com/blog/google-cloud-vs-aws/#compute
+GCP Collosus file system: https://www.systutorials.com/3202/colossus-successor-to-google-file-system-gfs/
+Andromeda network in GCP: https://cloudplatform.googleblog.com/2014/04/enter-andromeda-zone-google-cloud-platforms-latest-networking-stack.html
+Maglevs in GCP: https://ai.google/research/pubs/pub44824
+... to add more
