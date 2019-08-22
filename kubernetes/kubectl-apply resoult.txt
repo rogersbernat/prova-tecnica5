@@ -68,7 +68,7 @@ steps:
 7 Kubelet will assure these pods are running, the scheduler will handle the allocation of the pods. After the reconciliation process is complete, the controllers receive a notification if the object has been created/updated/not changed.  
 8 The controllers are observers of the state of the live objects. Controllers do not Reconcile events, rather they Reconcile the expected cluster state to the observed cluster state at the time Reconcile is run.
 9 if we have a deployment, we will observe that a new replicaset is created, a rollout is triggered and when pods become ready they will replace the old one progressively.
-10 we receive a message in the console, in this case <deployment-created>
+10 we receive a message in the terminal, in this case <deployment-created>
 
 
 [1] https://github.com/kubernetes/client-go/blob/f4e58ce6093cceb73a928dde55899917e4a5372d/tools/cache/reflector.go#L46
