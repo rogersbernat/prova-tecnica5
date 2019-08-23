@@ -1,29 +1,31 @@
-Day 1:
+Idea:
 
-Defining folder structure, test terraform init with AWS and document what is DNS resolver:
+        Day 1:
 
---- Documentation:
+        Defining folder structure, test terraform init with AWS and document what is DNS resolver:
 
-    easy guide from AWS docs:
-            https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/resolver-getting-started.html
+        --- Documentation used:
 
-    tech talk description for dns resolver:
-  
-            https://www.youtube.com/watch?v=Rka2rs0J9BI
-    
-Day 2: 
+                easy guide from AWS docs: https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/resolver-getting-started.html
 
-Not much time, tomorrow I have a presentation with my rundeck project so I priorized this first.
+                tech talk description for dns resolver: https://www.youtube.com/watch?v=Rka2rs0J9BI
 
-        Created vpc in Ireland with Terraform and played a bit with EC2 Instances (So damn slow booting comparated with GCP!)
-        The concepts of vpc and networking are different, in GCP they use the Metadata Service (in GCP you can't touch DNS in the instance or you loose ssh connectivity!)
 
-        So Far I reproduced the environment to automate with Terraform and made a 'shoplist' of things I have to not forget when writting the terraform template.
+Planning:
 
-Day 3:
+        Day 2: 
 
-The presentation went great! Many people claped! (it's a big advance from manual deployments to automate them in 1 single click!)
+        Not much time, tomorrow I have a presentation with my rundeck project so I priorized this first.
 
-        Today I played a bit with terraform, I made basic instance / 2 vpc / resolver and security rule (Now I'm getting to know AWS differences, it's funny though)
+                Created vpc in Ireland with Terraform and played a bit with EC2 Instances (So damn slow booting comparated with GCP!)
+                The concepts of vpc and networking are different, in GCP they use the Metadata Service (in GCP you can't touch DNS in the instance or you loose ssh connectivity!)
 
-        So I lack how to connect the instance with the resolver IP, not familiar with aws, I need this step and refine the code to make it look more cool (and scalable/mainteinable as well)
+                So Far I reproduced the environment to automate with Terraform and made a 'shoplist' of things I have to not forget when writting the terraform template.
+
+        Day 3:
+
+        The presentation went great! Many people claped! (it's a big advance from manual deployments to automate them in 1 single click!)
+
+                Today I played a bit with terraform, I made basic instance / 2 vpc / resolver and security rule (Now I'm getting to know AWS differences, it's funny though)
+
+                So I lack how to connect the instance with the resolver IP, not familiar with aws, I need this step and refine the code to make it look more cool (and scalable/mainteinable as well)
