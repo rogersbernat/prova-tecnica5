@@ -19,3 +19,11 @@ Not much time, tomorrow I have a presentation with my rundeck project so I prior
         The concepts of vpc and networking are different, in GCP they use the Metadata Service (in GCP you can't touch DNS in the instance or you loose ssh connectivity!)
 
         So Far I reproduced the environment to automate with Terraform and made a 'shoplist' of things I have to not forget when writting the terraform template.
+
+Day 3:
+
+The presentation went great! Many people claped! (it's a big advance from manual deployments to automate them in 1 single click!)
+
+        Today I played a bit with terraform, I made basic instance / 2 vpc / resolver and security rule (Now I'm getting to know AWS differences, it's funny though)
+
+        So I lack how to connect the instance with the resolver IP, not familiar with aws, I need this step and refine the code to make it look more cool (and scalable/mainteinable as well)
