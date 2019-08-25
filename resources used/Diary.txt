@@ -29,3 +29,9 @@ Planning:
                 Today I played a bit with terraform, I made basic instance / 2 vpc / resolver and security rule (Now I'm getting to know AWS differences, it's funny though)
 
                 So I lack how to connect the instance with the resolver IP, not familiar with aws, I need this step and refine the code to make it look more cool (and scalable/mainteinable as well)
+        day 4:
+
+                rest :P
+        Day 5:
+                playing with terraform and understanding AWS route 53 resolver to answer question 4: https://www.youtube.com/watch?v=D1n5kDTWidQ
+                ok so I made the technical test and need to resolve/improve the rest of questions (1 and 4). There are many differences between AWS and GCP which delayed me but I think I have almost all most important. The test is not much hard, I'm spending too much time on it.

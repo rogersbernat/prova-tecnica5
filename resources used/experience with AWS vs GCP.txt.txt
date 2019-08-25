@@ -4,4 +4,9 @@ AWS ec2 instances were based in XEN server and in GCP they are based in KVM: htt
 GCP Collosus file system: https://www.systutorials.com/3202/colossus-successor-to-google-file-system-gfs/
 Andromeda network in GCP: https://cloudplatform.googleblog.com/2014/04/enter-andromeda-zone-google-cloud-platforms-latest-networking-stack.html
 Maglevs in GCP: https://ai.google/research/pubs/pub44824 // https://medium.com/martinomburajr/maglev-the-load-balancer-behind-googles-infrastructure-architectural-overview-part-1-3-3b9aab736f40
+
+
+DHCP!! In AWS you can configure the DHCP service in Google Cloud it works way different: https://cloud.google.com/compute/docs/internal-dns#resolv.conf
+How to configure DNS in instances in AWS: https://www.youtube.com/watch?v=0xDYDTss2jQ
+
 ... to add more
