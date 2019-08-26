@@ -24,3 +24,4 @@ variable "public_key_path" {
     description = "the path for public ssh key"
     default = "C:/Users/roger/downloads/public.pub"
 }
+

@@ -35,3 +35,12 @@ Planning:
         Day 5:
                 playing with terraform and understanding AWS route 53 resolver to answer question 4: https://www.youtube.com/watch?v=D1n5kDTWidQ
                 ok so I made the technical test and need to resolve/improve the rest of questions (1 and 4). There are many differences between AWS and GCP which delayed me but I think I have almost all most important. The test is not much hard, I'm spending too much time on it.
+        Day 6: 
+
+                retracted terraform keys in provider.tf and exploring different options to store the keys (definitly this was a workaround, it's my test account not my corp one) so exploring things like vault https://medium.com/@mitesh_shamra/terraform-security-using-vault-ed0fa1db4e09
+                or env variables (perhaps easier) but I tested in windows and not much progress...
+
+                anyway, I Dockerized a basic dnsmasq conf in alpine, this is perhaps the most scalable way and HA using a regional cluster (but it already has kube-dns so it's pretty useless as it eats more resources from the cluster, also price is way different than in GCP, https://aws.amazon.com/eks/pricing/?nc1=h_ls vs https://cloud.google.com/products/calculator/#tab=container)
+                If I want to scale and edit, I need to dockerize it again, after editing the config files (or if I go to k8s I can use configmaps and just restart the pods). the config should work for a vm as it is the same, so I can reuse it if this step is not successful. Also k8s is perhaps safer than vms (different network and exposing only the port 53, more isolated)
+
+                I did not worked today with terraform, it's stable for now so let's don't touch it much.

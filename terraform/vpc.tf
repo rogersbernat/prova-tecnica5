@@ -2,7 +2,7 @@ resource "aws_internet_gateway" "gw-dns-zone" {
     vpc_id = "${aws_vpc.dns-zone.id}"
 }
 
-resource "aws_vpc" "dns-zone" {
+terresource "aws_vpc" "dns-zone" {
     cidr_block = "${var.vpc1_cidr}"
     enable_dns_hostnames = false
     enable_dns_support = true

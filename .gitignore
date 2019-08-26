@@ -5,3 +5,5 @@ terraform/terraform.tfstate.backup
 terraform/.terraform/modules/vpc/terraform-aws-modules-terraform-aws-vpc-b51422b/.gitignore
 
 terraform/.terraform/plugins/windows_amd64/terraform-provider-aws_v2.24.0_x4.exe
+terraform/provider.tf
+terraform/.terraform/plugins/linux_amd64/terraform-provider-aws_v2.25.0_x4

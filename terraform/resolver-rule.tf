@@ -2,7 +2,7 @@ resource "aws_route53_resolver_rule" "all" {
   domain_name = "."
   rule_type   = "SYSTEM"
 }
-resource "aws_route53_resolver_rule_association" "example" {
+resource "aws_route53_resolver_rule_association" "resolve-to-amazon" {
   resolver_rule_id = "${aws_route53_resolver_rule.all.id}"
   vpc_id           = "${aws_vpc.dns-zone.id}"
 }
