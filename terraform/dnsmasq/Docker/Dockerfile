@@ -5,4 +5,3 @@ COPY dnsmasq.conf /etc/dnsmasq.d/dnsmasq.conf
 COPY resolv.dnsmasq /etc/dnsmasq.d/resolv.dnsmasq
 EXPOSE 53 53/udp
 ENTRYPOINT ["dnsmasq", "-k"]
-CMD ["cat", "/etc/resolv.conf"]

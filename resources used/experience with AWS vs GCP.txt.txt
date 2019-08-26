@@ -9,4 +9,7 @@ Maglevs in GCP: https://ai.google/research/pubs/pub44824 // https://medium.com/m
 DHCP!! In AWS you can configure the DHCP service in Google Cloud it works way different: https://cloud.google.com/compute/docs/internal-dns#resolv.conf
 How to configure DNS in instances in AWS: https://www.youtube.com/watch?v=0xDYDTss2jQ
 
+good to know! Internal Load Balancer for k8s in aws! https://kubernetes.io/docs/concepts/services-networking/service/#internal-load-balancer
+
+
 ... to add more
