@@ -52,6 +52,7 @@ I0821 17:03:40.223532    8676 round_trippers.go:447]     Date: Wed, 21 Aug 2019 
 I0821 17:03:40.224532    8676 request.go:942] Response Body: {"kind":"Deployment","apiVersion":"apps/v1","metadata":{"name":"nginx0-deployment","namespace":"default","selfLink":"/apis/apps/v1/namespaces/default/deployments/nginx0-deployment","uid":"dc109c76-c424-11e9-9b37-00155d040d01","resourceVersion":"24087","generation":1,"creationTimestamp":"2019-08-21T15:03:40Z","labels":{"app":"nginx0-deployment"},"annotations":{"kubectl.kubernetes.io/last-applied-configuration":"{\"apiVersion\":\"apps/v1\",\"kind\":\"Deployment\",\"metadata\":{\"annotations\":{},\"labels\":{\"app\":\"nginx0-deployment\"},\"name\":\"nginx0-deployment\",\"namespace\":\"default\"},\"spec\":{\"replicas\":2,\"selector\":{\"matchLabels\":{\"app\":\"nginx0\"}},\"template\":{\"metadata\":{\"labels\":{\"app\":\"nginx0\"}},\"spec\":{\"containers\":[{\"image\":\"k8s.gcr.io/nginx:1.7.9\",\"name\":\"nginx\",\"ports\":[{\"containerPort\":80}]}]}}}}\n"}},"spec":{"replicas":2,"selector":{"matchLabels":{"app":"nginx0"}},"template":{"metadata":{"creationTimestamp":null,"labels":{"app":"nginx0"}},"spec":{"contain [truncated 545 chars]
 deployment.apps/nginx0-deployment created
 
+<<<<<<< HEAD
 steps:
 
 1 authenticate with the local config file or env variable.
@@ -63,3 +64,31 @@ steps:
 7 this information travels to the kubelet that triggers a new replica-set to create or replace the current configuration.
 8 if we have a deployment, we will observe that a new replicaset is created, when it becomes ready it will replace the old one.
 9 we receive a message in the console, in this case <deployment-created>
+=======
+
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+steps:
+
+(Well not much detailed, this is very complex and long, hope you find the details you are seeking I could write a 10 pags doc with diagrams to explain all of this)
+
+1 Authenticate with the local config file or env variable.
+2 Encapsulate the POST call to the kubernetes api-server in the address provided in the configfile.
+3 It will travel to the destination using the network and once reaching the api-server it will decapsulate and authenticate.
+4 The kube api-server talks to the etcd and the deployment controller to ask if these object exist [1]. Reflector watches a specified resource and causes all changes to be reflected in the given store.
+5 The deployment controller will talk with the replicaset with a POST to start the reconciliation.
+6 Reconciliation: The Deployment controller will create/delete Replica set. The Replicaset will create/delete new pods. The Kube-scheduler will allocate these pods to the Nodes. The CRI (Container Runtime Interface) Will run these pods and the CNI [2] will give them network connectivity.
+7 Kubelet will assure these pods are running, the scheduler will handle the allocation of the pods. After the reconciliation process is complete, the controllers receive a notification if the object has been created/updated/not changed.  
+8 The controllers are observers of the state of the live objects. Controllers do not Reconcile events, rather they Reconcile the expected cluster state to the observed cluster state at the time Reconcile is run.
+9 if we have a deployment, we will observe that a new replicaset is created, a rollout is triggered and when pods become ready they will replace the old one progressively.
+10 we receive a message in the console, in this case <deployment-created>
+
+
+[1] https://github.com/kubernetes/client-go/blob/f4e58ce6093cceb73a928dde55899917e4a5372d/tools/cache/reflector.go#L46
+[2] https://github.com/kubernetes/kubernetes/blob/e8462b5b5dc2584fdcd18e6bcfe9f1e4d970a529/pkg/kubelet/dockershim/network/plugins.go#L48
+
+Interesting sources regarding this topic:
+https://borismattijssen.github.io/articles/kubernetes-informers-controllers-reflectors-stores
+https://www.slideshare.net/harryzhang735/kubernetes-beyond-a-black-box-part-2
+https://speakerdeck.com/thockin/kubernetes-what-is-reconciliation
+>>>>>>> b8a155f42c3632bb7674d1d4b918ff7e34940a04

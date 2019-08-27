@@ -1,0 +1,9 @@
+From Kubernetes Pod:
+
+/ # nslookup emnify.com
+Server:         127.0.0.1
+Address:        127.0.0.1#53
+
+Non-authoritative answer:
+Name:   emnify.com
+Address: 52.219.74.198
