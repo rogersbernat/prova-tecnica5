@@ -6,7 +6,7 @@ metadata:
   labels:
     app: dnsmasq-resolver
 spec:
-  replicas: 2
+  replicas: 1
   selector:
     matchLabels:
       app: dnsmasq-resolver
@@ -20,6 +20,11 @@ spec:
         image: rogersbernat/dnsmasq:latest
         ports:
         - containerPort: 53
+          name: udp
+          protocol: UDP
+        - containerPort: 53
+          name: tcp
+          protocol: TCP
         resources:
           requests:
             memory: 20Mi
@@ -30,7 +35,8 @@ spec:
       dnsPolicy: "None"
       dnsConfig:
         nameservers:
-        - 8.8.4.4
+        - 127.0.0.1
+        - 34.77.190.64
         searches:
           - ns1.svc.cluster-domain.example
           - my.dns.search.suffix
@@ -38,11 +44,16 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: dns-service
+  name: my-service
 spec:
   selector:
     app: dnsmasq-resolver
   ports:
-    - protocol: TCP
+    - protocol: UDP
       port: 53
       targetPort: 53
+  clusterIP: 10.0.5.155
+  type: LoadBalancer
+status:
+  loadBalancer:
+    ingress:

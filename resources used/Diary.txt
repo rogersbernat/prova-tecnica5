@@ -44,3 +44,13 @@ Planning:
                 If I want to scale and edit, I need to dockerize it again, after editing the config files (or if I go to k8s I can use configmaps and just restart the pods). the config should work for a vm as it is the same, so I can reuse it if this step is not successful. Also k8s is perhaps safer than vms (different network and exposing only the port 53, more isolated)
 
                 I did not worked today with terraform, it's stable for now so let's don't touch it much.
+        Day 7:
+
+                Played a bit to debug Kubernetes using an external load balancer to see if from home i can connect to the dnsmasq serice, no luck.
+                The container itself is able to resolve 8.8.4.4 [1] (the dnameservers I configured in the resolv.dnsmasq file, despite pod configuration pods to localhost)
+                This option is crazy but a dns service is number1 service to be containerized, like mq services or dhcp or rest. This is why I like more than the option of having VMs.
+                Also is more maintainable, versionable and secure (we can set a proxy rule to don't accept traffic and with kubernetes rules to restart automaticly if it gets stuck)
+
+                [1] see nslookup.txt in the folder dnsmasq 
+
+                I'm not feeling realy good so I I will rest today.

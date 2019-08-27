@@ -19,10 +19,10 @@ $docker ps -a
 
 To stop a container
 
-$docker stop "<container-id>"
+$docker stop "container-id"
 
 to remove a container:
-$docker rm "<container-id>"
+$docker rm "container-id"
 
 To remove an image:
-$docker rmi "<image-id>"
+$docker rmi "image-id"
