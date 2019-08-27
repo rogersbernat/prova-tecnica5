@@ -50,7 +50,9 @@ Planning:
                 The container itself is able to resolve 8.8.4.4 [1] (the dnameservers I configured in the resolv.dnsmasq file, despite pod configuration pods to localhost)
                 This option is crazy but a dns service is number1 service to be containerized, like mq services or dhcp or rest. This is why I like more than the option of having VMs.
                 Also is more maintainable, versionable and secure (we can set a proxy rule to don't accept traffic and with kubernetes rules to restart automaticly if it gets stuck)
-
-                [1] see nslookup.txt in the folder dnsmasq 
+                
+                 Was it failing as I can't configure a loadbalancer (which is based in node port service) UDP and TCP at the same time? https://github.com/kubernetes/kubernetes/issues/20092
+                
+                 [1] see nslookup.txt in the folder dnsmasq 
 
                 I'm not feeling realy good so I I will rest today.
