@@ -7,6 +7,8 @@ terraform/.terraform/modules/vpc/terraform-aws-modules-terraform-aws-vpc-b51422b
 <<<<<<< HEAD
 =======
 terraform/.terraform/plugins/windows_amd64/terraform-provider-aws_v2.24.0_x4.exe
-terraform/provider.tf
-terraform/.terraform/plugins/linux_amd64/terraform-provider-aws_v2.25.0_x4
->>>>>>> b8a155f42c3632bb7674d1d4b918ff7e34940a04
+terraform/provider.tf>>>>>>> b8a155f42c3632bb7674d1d4b918ff7e34940a04
+.history/terraform/dnsmasq/Docker/dnsmasq/README_20190827221434.MD
+.history/.gitignore_20190827224449
+.history/terraform/dnsmasq/Docker/dnsmasq/README_20190827224254.MD
+.history/terraform/dnsmasq/Docker/dnsmasq/README_20190827224433.MD

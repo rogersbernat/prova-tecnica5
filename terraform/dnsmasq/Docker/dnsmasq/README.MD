@@ -15,14 +15,20 @@ If executing in a docker host, it will resolve using the host dns, so we have to
 $ docker run --rm -dns=169.254.169.253  dnsmasq:latest
 
 To list the Docker containers:
-$docker ps -a
+$ docker ps -a
+
+To list docker images:
+
+$ docker images
 
 To stop a container
 
-$docker stop "container-id"
+$ docker stop "container-id"
 
-to remove a container:
-$docker rm "container-id"
+To remove a container:
+
+$ docker rm "container-id"
 
 To remove an image:
-$docker rmi "image-id"
+
+$ docker rmi "image-id"
