@@ -56,3 +56,23 @@ Planning:
                  [1] see nslookup.txt in the folder dnsmasq 
 
                 I'm not feeling realy good so I I will rest today.
+
+                soo I rested a couple of hours and feel way better after a walk.
+
+                I'm playing with packer to provison instances to aws, never used before so let's see how it goes (im using dev branch)
+                Perhaps with ingress I can solve the tcp/udp issue with node ports in kubernetes, ingress is a more advanced loadbalancer.
+                https://kubernetes.io/docs/concepts/services-networking/ingress/#single-service-ingress
+
+        Day 8:
+
+                OK so Packer is more easy than I imagined. I made a simple script to install the tools I need to debug while generating the image to understand how is its behavior. I realise that despite I remove /etc/resolv.conf to create my, it's rewrited again (there's some agent in the vm?).
+                Also with the same settings than in the Docker container dnsmasq is failing to restart:
+
+                amazon-ebs: Aug 28 19:04:13 ip-172-31-9-200 dnsmasq[6797]: dnsmasq: bad option at line 1 of /etc/dnsmasq.d/resolv.dnsmasq
+                amazon-ebs: Aug 28 19:04:13 ip-172-31-9-200 dnsmasq[6797]: bad option at line 1 of /etc/dnsmasq.d/resolv.dnsmasq
+                amazon-ebs: Aug 28 19:04:13 ip-172-31-9-200 dnsmasq[6797]: FAILED to start up
+
+                I will think with another strategy, perhaps is not working well like this.
+                It would be great to catch this AMI generated and include it as env var in the --to do dnsmasq.tf to automate this step 
+                or use a jenkins to build a pipeline for this process in stages like 1) scm from git, 2 generate image with packer 3) deploy infrastructure in terraform 4) script to ssh in the machine to validate the dns, if dns resolution after x times == 0 exit 0, else 1 = fail.
+

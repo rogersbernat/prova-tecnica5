@@ -11,5 +11,7 @@ How to configure DNS in instances in AWS: https://www.youtube.com/watch?v=0xDYDT
 
 good to know! Internal Load Balancer for k8s in aws! https://kubernetes.io/docs/concepts/services-networking/service/#internal-load-balancer
 
+So AWS has an agent in the vms like GCP with metadata service that overwrites the resolv.conf file (perhaps hosts too?) https://cloud.google.com/compute/docs/internal-dns#resolv.conf
+
 
 ... to add more
