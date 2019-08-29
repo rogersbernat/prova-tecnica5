@@ -1,13 +1,13 @@
 {
   "variables": {
-    "aws_access_key": "",
+    "aws_access_key": "boo ",
     "aws_secret_key": "",
     "region": "eu-west-1"
   },
     "builders": [
         {
             "access_key": "{{user `aws_access_key`}}",
-            "ami_name": "packer-linux-aws-demo-{{timestamp}}",
+            "ami_name": "dns-resolver-{{timestamp}}",
             "instance_type": "t2.micro",
             "region": "eu-west-1",
             "secret_key": "{{user `aws_secret_key`}}",
@@ -25,6 +25,15 @@
         }        
     ],
     "provisioners": [
+    {
+        "type": "file",
+        "source": "C:/users/roger/desktop/temp.json",
+        "destination": "/home/ubuntu/"
+    },
+    {
+        "type": "shell",
+        "script": "./scripts/stackdriver.sh"
+    },
         {
             "type": "file",
             "source": "../Docker/dnsmasq/dnsmasq.conf",

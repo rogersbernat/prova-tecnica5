@@ -12,3 +12,10 @@ terraform/provider.tf>>>>>>> b8a155f42c3632bb7674d1d4b918ff7e34940a04
 .history/.gitignore_20190827224449
 .history/terraform/dnsmasq/Docker/dnsmasq/README_20190827224254.MD
 .history/terraform/dnsmasq/Docker/dnsmasq/README_20190827224433.MD
+terraform/.terraform/plugins/linux_amd64/terraform-provider-aws_v2.25.0_x4
+terraform/provider.tf
+terraform/.terraform.tfstate.lock.info
+
+terraform/provider.tf
+*.exe
+*.backup

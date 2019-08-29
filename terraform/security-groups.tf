@@ -14,3 +14,20 @@ from_port = 22
    cidr_blocks = ["0.0.0.0/0"]
  }
 }
+
+resource "aws_security_group" "internal-dns" {
+name = "internal-dns"
+vpc_id = "${aws_vpc.dns-zone.id}"
+ingress {
+    cidr_blocks = ["10.0.0.0/24"]
+    from_port = 53
+    to_port = 53
+    protocol = "tcp"
+  }
+  ingress {
+    cidr_blocks = ["10.0.0.0/24"]
+    from_port = 53
+    to_port = 53
+    protocol = "udp"
+  }
+}

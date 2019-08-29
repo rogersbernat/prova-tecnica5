@@ -2,7 +2,16 @@ resource "aws_internet_gateway" "gw-dns-zone" {
     vpc_id = "${aws_vpc.dns-zone.id}"
 }
 
-terresource "aws_vpc" "dns-zone" {
+resource "aws_vpc_dhcp_options" "dns_resolver" {
+  domain_name_servers = ["${var.dnsmasq-server-private_ip}"]
+}
+
+resource "aws_vpc_dhcp_options_association" "dns_resolver" {
+  vpc_id          = "${aws_vpc.dns-zone.id}"
+  dhcp_options_id = "${aws_vpc_dhcp_options.dns_resolver.id}"
+}
+
+resource "aws_vpc" "dns-zone" {
     cidr_block = "${var.vpc1_cidr}"
     enable_dns_hostnames = false
     enable_dns_support = true
