@@ -6,7 +6,7 @@ data "aws_ami" "packer-linux-aws-demo-" {
     values = ["hvm"]
   }
 
-  owners = ["416389928587"] # ME
+  owners = ["${var.owner-ami}"] # ME
 }
 
 resource "aws_instance" "dnsmasq-server" {
