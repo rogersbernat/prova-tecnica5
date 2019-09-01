@@ -1,0 +1,18 @@
+So here basically, to make escalable and to put in production our DNS server, we have to assure many things:
+
+We will start from the basic: accessibility. Disable the root user and don't make it owner of the dns process. Authorize the trusted personeel to have rights to modify/edit this servers. We should not expose our DNS server to the world, so the first step would be allocate it in an isolated VPC. Then when we create the DNS server, it mustn't have a public IP, so we should route the requests to a trusted gateway.
+In this VPC we have to open the ports to the trusted hosts/network. We should keep idempotency on the configuration of this server, keep the template/files to recreate it fast in case we loose it. If we want to have ssh access then  we have to rotate the ssh keys or generate
+them on demand per every connection and from a trusted bastion host. We should keep the server updated renewing it with a template to agilize the deployment/restauration. At the application configuration, to avoid DNS spoofing, we can use protocols like DNSSEC which takes advantages of key signature
+records but may be not effective when requesting subdomains. To avoid MID attacks we can use TLS over DNS, however this tech is very new (Google just started working in production with it [1]). The key in security is monitor everything in the network from the entry points through the vlans and firewalls. Set alerts if we notice unusual traffic so we may be able to see it coming.
+We can use IPtables in the server to reject requests untrusted hosts. Monitor everything from the server (CPU, Memory, disk, requests, dns logs, syslogs...) and set alerts if noticed unexpected behaviours.
+
+
+
+Scalability:
+
+As long as we use VMS, we can use an internal loadbalancer to call group of instances behind. If we template the instances we may autoscale them under demand, in case that we need. Then if we don't need this feature as we have not so much requests, we can add multiple network interfaces to a single vm linked to different vpcs
+this means that we can reuse the same so we can maintain less machines and centralize the requests in a single point so we have to consider CPU/MEM disk IOPS to scale it. In case we use dnsmasq as server, editing the file /etc/hosts we can add the ips of our trusted hosts, so we don't need to request the dns server as we know the answer already. We can update the host list file
+by generating a new template to preserve the idempotency or use terraform [1] or ansible to update it, however for ansible we must provide ssh key and open a port for that, so unless we rotate the keys often is not the option I like (more terraform and less ansible). Investigate if running docker in a dockerhost for that is more secure
+and performs good. Else use kubernetes or another source (which I don't think is viable as per a high cost). If not using Ansible, rolling blue-green deployments to update the server to avoid downtime.
+
+[1] https://developers.google.com/speed/public-dns/docs/dns-over-tls
