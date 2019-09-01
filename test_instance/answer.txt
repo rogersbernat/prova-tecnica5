@@ -1,0 +1,55 @@
+Please see terraform deployment, instance will be created there.
+
+To verify the instance is realy used, I used the DIG command. Dig first looks the /etc/resolv.conf file. If a correct dns is there, then it will attempt to resolve in that server.
+In my case I pointed the DHCP server to use the static private IP of the DNS server, therefore DHCP announces all the vms that the configured IP is the DNS server for that LAN. Also everytime the DHCP client requests an IP,
+it will overwrite the /etc/resolv.conf file, in case it change. We can enforce DIG to resolve in a desired server using @-server-ip E.G. $ as explained in the following example.
+
+Example:
+
+The command below shows that after launching $ dig google.com , we receive an answer from the query, which comes from the server '212.166.211.2#53' the current server delivered from the DHCP. The second example points to 8.8.8.8 and so it resolves with this server (and it takes longer!).  
+
+
+roger@DESKTOP-PFI75D9:/mnt/c/git/prova-tecnica5$ dig google.com
+
+; <<>> DiG 9.11.3-1ubuntu1.8-Ubuntu <<>> google.com
+;; global options: +cmd
+;; Got answer:
+;; ->>HEADER<<- opcode: QUERY, status: NOERROR, id: 34421
+;; flags: qr rd ra; QUERY: 1, ANSWER: 1, AUTHORITY: 0, ADDITIONAL: 1
+
+;; OPT PSEUDOSECTION:
+; EDNS: version: 0, flags:; udp: 4096
+;; QUESTION SECTION:
+;google.com.                    IN      A
+
+;; ANSWER SECTION:
+google.com.             107     IN      A       172.217.16.238      
+
+;; Query time: 13 msec
+;; SERVER: 212.166.211.2#53(212.166.211.2)
+;; WHEN: Mon Sep 02 00:02:07 CEST 2019
+;; MSG SIZE  rcvd: 55
+-------------------------------------------------------------------------------------
+
+
+roger@DESKTOP-PFI75D9:/mnt/c/git/prova-tecnica5$ dig @8.8.8.8 google.com
+
+; <<>> DiG 9.11.3-1ubuntu1.8-Ubuntu <<>> @8.8.8.8 google.com
+; (1 server found)
+;; global options: +cmd
+;; Got answer:
+;; ->>HEADER<<- opcode: QUERY, status: NOERROR, id: 22873
+;; flags: qr rd ra; QUERY: 1, ANSWER: 1, AUTHORITY: 0, ADDITIONAL: 1
+
+;; OPT PSEUDOSECTION:
+; EDNS: version: 0, flags:; udp: 512
+;; QUESTION SECTION:
+;google.com.                    IN      A
+
+;; ANSWER SECTION:
+google.com.             116     IN      A       216.58.214.174
+
+;; Query time: 39 msec
+;; SERVER: 8.8.8.8#53(8.8.8.8)
+;; WHEN: Mon Sep 02 00:04:11 CEST 2019
+;; MSG SIZE  rcvd: 55
