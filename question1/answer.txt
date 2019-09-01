@@ -1,0 +1,23 @@
+What does a kubectl apply?
+
+This process is hard and it triggers a lot of processes inside however it's less than 1 second! so let's examinate what does happen when we trigger a kubectl apply in our computer:
+
+1 Authenticate with the local config file.
+[2] Encapsulate the POST call to the kubernetes api-server in the address provided in the configfile.
+3 It will travel to the destination using the network and once reaching the api-server it will decapsulate and authenticate.
+[4] The kube api-server talks to the etcd and the deployment controller to ask if these object exist. Reflector watches a specified resource and causes all changes to be reflected in the given store.
+5 The deployment controller will talk with the replicaset with a POST to start a reconciliation.
+6 Deppending on the response, The Deployment controller will create/delete Replica set. The Replicaset will create/delete new pods. The Kube-scheduler will allocate these pods to the Nodes. The CRI will run these pods and the CNI will give them network connectivity.
+7 Kubelet will assure these pods are running, the scheduler will handle the allocation of the pods. After the reconciliation process is complete, the controllers receive a notification if the object has been created/updated/not changed.  
+8 The controllers are observers of the state of the live objects. Controllers do not Reconcile events, rather they Reconcile the expected cluster state to the observed cluster state at the time Reconcile is run.
+9 If we have a deployment, we will observe that a new replicaset is created, a rollout is triggered and when pods become ready they will replace the old one progressively. If we don't have a deployment it will be created. If we apply the same template as before, we may no see changes.
+10 After all process is complete, the kube-api server will talk to us and we will receive a message in the console if the yamlfile has been modified/not modified or created.
+
+
+[2] Detailed: The application will open a socket to write on the transport layer this socket also talks to the DNS resolver which will talk to the DNS authoritary server (if he doesn't know the address) to know where is the destination (IP + port), the authority DNS will reply with the correct IP address. Then the application will start a connection to the correct address returned.
+The transport layer encapsulates the request in two segments: local port and destination port, and it will interact with the Network Layer to push it to the destination. The IP layer (Network Layer) will find from the host the next hop in the search for the destination. The first hop will be the host's gateway.
+Using ARP protocol the network layer will detect the gateway. There the IP layer will encapsulate the TCP segments in TCP, source IP and will request the Link Layer to send to the next hop. Link Layer encapsulates the segments in frames with EtherType = IP, source MAC (local MAC) and destination MAC (obtained from ARP).
+The local router will repeat this process and the other routers along the way. And when arriving the destination it will do the decapsulation (inverse process) till reach the destination IP and port.
+
+
+[4] The language is used in kubernetes is GOLANG. It will take advantage of functions variables expressions... to compile the code in something that can talk with the machine where it is executed.  
