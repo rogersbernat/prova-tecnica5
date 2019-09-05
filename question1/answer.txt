@@ -3,10 +3,10 @@ What does a kubectl apply?
 This process is hard and it triggers a lot of processes inside however it's less than 1 second! so let's examinate what does happen when we trigger a kubectl apply in our computer:
 
 1 Authenticate with the local config file.
-[2] Encapsulate the POST call to the kubernetes api-server in the address provided in the configfile.
-3 It will travel to the destination using the network and once reaching the api-server it will decapsulate and authenticate.
-[4] The kube api-server talks to the etcd and the deployment controller to ask if these object exist. Reflector watches a specified resource and causes all changes to be reflected in the given store.
-5 The deployment controller will talk with the replicaset with a POST to start a reconciliation.
+[2] Encapsulate the POST call to the kubernetes api-server n the address provided in the configfile [2.2]. By default kube api-server listens at port 443, we can also check the address of the server once logged with $kubectl cluster-info.
+3 It will travel to the destination using the network and once reaching the kube api-server it will decapsulate and authenticate [3.1]. If it is authorized then the Admission Controll modules will verify the permissions for the user that makes the call, if he can create/modify/delete the resource.
+[4] The kube api-server talks using a rest call to the etcd and to the deployment controller to ask if these object exist. The controllers are the workers responsible to control that the objects are in the desired state.
+5 The components will talk internally using localhost and the port 8080 by default. The deployment controller will talk with the replicaset with a POST to start a reconciliation.
 6 Deppending on the response, The Deployment controller will create/delete Replica set. The Replicaset will create/delete new pods. The Kube-scheduler will allocate these pods to the Nodes. The CRI will run these pods and the CNI will give them network connectivity.
 7 Kubelet will assure these pods are running, the scheduler will handle the allocation of the pods. After the reconciliation process is complete, the controllers receive a notification if the object has been created/updated/not changed.  
 8 The controllers are observers of the state of the live objects. Controllers do not Reconcile events, rather they Reconcile the expected cluster state to the observed cluster state at the time Reconcile is run.
@@ -19,5 +19,8 @@ The transport layer encapsulates the request in two segments: local port and des
 Using ARP protocol the network layer will detect the gateway. There the IP layer will encapsulate the TCP segments in TCP, source IP and will request the Link Layer to send to the next hop. Link Layer encapsulates the segments in frames with EtherType = IP, source MAC (local MAC) and destination MAC (obtained from ARP).
 The local router will repeat this process and the other routers along the way. And when arriving the destination it will do the decapsulation (inverse process) till reach the destination IP and port.
 
+[2.2] https://kubernetes.io/docs/reference/access-authn-authz/controlling-access/#transport-security
+
+[3.1] https://kubernetes.io/docs/reference/access-authn-authz/controlling-access/#authentication
 
 [4] The language is used in kubernetes is GOLANG. It will take advantage of functions variables expressions... to compile the code in something that can talk with the machine where it is executed.  

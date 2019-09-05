@@ -12,7 +12,9 @@ Scalability:
 
 As long as we use VMS, we can use an internal loadbalancer to call group of instances behind. If we template the instances we may autoscale them under demand, in case that we need. Then if we don't need this feature as we have not so much requests, we can add multiple network interfaces to a single vm linked to different vpcs
 this means that we can reuse the same so we can maintain less machines and centralize the requests in a single point so we have to consider CPU/MEM disk IOPS to scale it. In case we use dnsmasq as server, editing the file /etc/hosts we can add the ips of our trusted hosts, so we don't need to request the dns server as we know the answer already. We can update the host list file
-by generating a new template to preserve the idempotency or use terraform [1] or ansible to update it, however for ansible we must provide ssh key and open a port for that, so unless we rotate the keys often is not the option I like (more terraform and less ansible). Investigate if running docker in a dockerhost for that is more secure
-and performs good. Else use kubernetes or another source (which I don't think is viable as per a high cost). If not using Ansible, rolling blue-green deployments to update the server to avoid downtime.
+by generating a new template to preserve the idempotency or use terraform [1] or ansible to update it, however for ansible we must provide ssh key and open a port for that, so unless we rotate the keys often is not the option I like (more terraform and less ansible). NO (Lesson learnt [2]). Use packer to provison the vm. 
+Use kubernetes or another source (which I don't think is viable as per a high cost). If not using Ansible, rolling blue-green deployments to update the server to avoid downtime.
 
 [1] https://developers.google.com/speed/public-dns/docs/dns-over-tls
+[2] Dockerhost is just not viable, we are facing many issues in jenkins as sometimes containers are stuck and we have to manually reboot them. Kubernetes is the option if going to use Docker now, realy bad idea dockerhosts.
+Packer could substitute the Docker since it's creating AMI templates (I wish I had known it before).
