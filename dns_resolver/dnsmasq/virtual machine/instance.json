@@ -25,6 +25,10 @@
     ],
     "provisioners": [
         {
+            "type": "shell",
+            "script": "./scripts/dns-ip.sh"
+        },
+        {
             "type": "file",
             "source": "properties/dhclient.conf",
             "destination": "/home/ubuntu/"
