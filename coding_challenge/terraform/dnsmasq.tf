@@ -18,6 +18,17 @@ resource "aws_instance" "dnsmasq-server" {
   vpc_security_group_ids = ["${aws_security_group.ingress-ssh-rule.id}"]
   security_groups = ["${aws_security_group.internal-dns.id}"]
   
+  provisioner "file" {
+    source      = "scripts/startup-script.sh"
+    destination = "/tmp/script.sh"
+  }
+    provisioner "remote-exec" {
+    inline = [
+      "chmod +x /tmp/script.sh",
+      "/tmp/script.sh args",
+    ]
+  }
+
   tags = {
     Name = "dnsmasq-server"
   }
