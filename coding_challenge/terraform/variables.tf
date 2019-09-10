@@ -21,7 +21,7 @@ variable "dns-resolver-name" {
 
 variable "public_key_path" {
     description = "the path for public ssh key"
-    default = "your-public-ssh key"
+    default = "/mnt/c/Users/Roger/Downloads/public.pub"
 }
 
 variable "dnsmasq-server-private_ip" {
@@ -31,11 +31,11 @@ variable "dnsmasq-server-private_ip" {
 
 variable "owner-ami" {
     description = "the account that owns the ami"
-    default = "write-here-your-account-id"
+    default = "416389928587"
 }
 
 variable "packer-ami" {
     description = "the dnsmasq server ami"
-    default = "ami-0727d78e477b394d8"
+    default = "ami-0f1f3313a7d12246b"
 }
 
