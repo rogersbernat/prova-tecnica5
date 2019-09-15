@@ -17,6 +17,7 @@ resource "aws_instance" "dnsmasq-server" {
     key_name = "${aws_key_pair.generated_key.key_name}"
   vpc_security_group_ids = ["${aws_security_group.ingress-ssh-rule.id}"]
   security_groups = ["${aws_security_group.internal-dns.id}"]
+  
   lifecycle  {
     create_before_destroy=true
  }
