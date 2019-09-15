@@ -21,12 +21,13 @@ module "vpc" {
   }
 }
 
-module "web_server_sg" {
-  source = "terraform-aws-modules/security-group/aws//modules/http-80"
+module "security_group" {
+  source = "terraform-aws-modules/security-group/aws"
+  name    	= "ssh"
+  description = "ssh from anywhere"
+  vpc_id  	= "${module.vpc.vpc_id}"
 
-  name        = "ssh"
-  description = "Security group for ssh with HTTP ports open within VPC"
-  vpc_id      = "${module.vpc.vpc_id}"
-
-  ingress_cidr_blocks = ["10.0.1.0/24"]
+  ingress_cidr_blocks = ["0.0.0.0/0"]
+  ingress_rules   	= ["ssh-tcp","all-icmp"]
+  egress_rules    	= ["all-all"]
 }
