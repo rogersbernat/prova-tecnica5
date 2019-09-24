@@ -1,12 +1,19 @@
 #!/bin/bash
 
-sudo apt update && sudo apt install -y dnsmasq
+
+sudo mv /home/debian/sources.list /etc/apt/sources.list
+
+sudo cat /etc/apt/sources.list
+
+sudo apt update && sudo apt install -y dnsmasq dnsutils
+
+sudo service dnsmasq status
 
 sudo groupadd -r dnsmasq
 sudo useradd -r -g dnsmasq dnsmasq
 
-sudo mv /home/ubuntu/dnsmasq.conf  /etc/dnsmasq.d/dnsmasq.conf
-sudo mv /home/ubuntu/dhclient.conf /etc/dhcp/dhclient.conf
+sudo mv /home/debian/dnsmasq.conf  /etc/dnsmasq.d/dnsmasq.conf
+sudo mv /home/debian/dhclient.conf /etc/dhcp/dhclient.conf
 
 sudo chown dnsmasq: /etc/dnsmasq.d/dnsmasq.conf
 sudo chown root: /etc/dhcp/dhclient.conf
