@@ -3,13 +3,13 @@ module "instance" {
 
   instance_count = 1
 
-  name          = "example-normal"
-  ami           = ${var.ami} # to do
-  instance_type = "c5.large"
+  name          = "dnsmasq-server${aws_vpc.vpc_id}"
+  ami           = ${var.packer-ami}
+  instance_type = "t2.micro"
   subnet_id     = tolist(data.aws_subnet_ids.all.ids)[0]
-  //  private_ips                 = ["172.31.32.5", "172.31.46.20"]
-  vpc_security_group_ids      = [module.security_group.this_security_group_id]
-  associate_public_ip_address = true
+    private_ips                 = ["172.31.32.5", "172.31.46.20"]
+  vpc_security_group_ids      = [module.security_group_vpc.security_group_vpc_id]
+  associate_public_ip_address = false
   placement_group             = aws_placement_group.web.id
 
   root_block_device = [
@@ -30,7 +30,7 @@ module "instance" {
   ]
 
   tags = {
-    "Env"      = "Private"
-    "Location" = "Secret"
+    Terraform = "true"
+    Environment = "dev"
   }
 }
