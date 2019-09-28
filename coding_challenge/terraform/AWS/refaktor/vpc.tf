@@ -1,7 +1,7 @@
 module "vpc" {
   source = "terraform-aws-modules/vpc/aws"
 
-  name = "my-vpc"
+  name = "dns-zone"
   cidr = "10.0.0.0/16"
 
   azs             = ["eu-west-1a", "eu-west-1b"]
@@ -21,7 +21,7 @@ module "vpc" {
   }
 }
 
-module "security_group" {
+module "security_group_vpc" {
   source = "terraform-aws-modules/security-group/aws"
   name    	= "ssh"
   description = "ssh from anywhere"
