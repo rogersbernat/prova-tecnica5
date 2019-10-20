@@ -21,7 +21,7 @@ module "vpc" {
   }
 }
 
-module "security_group" {
+module "ssh-sg" {
   source = "terraform-aws-modules/security-group/aws"
   name    	= "ssh"
   description = "ssh from anywhere"
@@ -30,4 +30,27 @@ module "security_group" {
   ingress_cidr_blocks = ["0.0.0.0/0"]
   ingress_rules   	= ["ssh-tcp","all-icmp"]
   egress_rules    	= ["all-all"]
+}
+
+module "dns-sg" {
+  source = "terraform-aws-modules/security-group/aws"
+name        = "user-service"
+  description = "Security group for user-service with custom ports open within VPC internally"
+  vpc_id      = "${module.vpc.vpc_id}"
+
+  ingress_cidr_blocks      = ["10.0.1.0/24"]
+  ingress_rules            = ["dns-53-udp"]
+  ingress_with_cidr_blocks = [
+    {
+      from_port   = 53
+      to_port     = 53
+      protocol    = "udp"
+      description = "DNS udp port"
+      cidr_blocks = "10.0.1.0/24"
+    },
+    {
+      rule        = "DNS-tcp"
+      cidr_blocks = "10.0.0.0/16"
+    },
+  ]
 }
