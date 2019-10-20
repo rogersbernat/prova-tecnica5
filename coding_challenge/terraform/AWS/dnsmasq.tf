@@ -1,5 +1,4 @@
 data "aws_ami" "packer-linux-aws-demo-" {
-  most_recent = true
 
   filter {
     name   = "virtualization-type"
